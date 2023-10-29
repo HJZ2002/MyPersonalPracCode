@@ -111,7 +111,20 @@ public class LNode <Object>{
 			return "head Node|" + head + "\n" + hold;
 		}
 	}
-	
+	public String traverseNode() {
+		String hold = "";
+		if(isEmpty()) {
+			hold = "List is Empty";
+		} else {
+			LNode<Student> pointer = head;
+			int ctr = 0;
+			while (pointer != null) {
+				hold+= pointer.data.getStudent()+"\n";
+				pointer = pointer.next;
+			}
+		}
+		return hold;
+	}
 	//deleting nodes at first
 	public void deleteAtFirst() {
 		if(isEmpty()) {
@@ -168,17 +181,18 @@ public class LNode <Object>{
 			link.next = pointer;
 		}
 	}
-	//getting the first node
+	//Hosea James Zacarias
 	public Object getFirst() {
 		 if(isEmpty()) {
 			 error_message("The list is empty");
 			 return null;
+		 } else {
+		   return (Object) head.data;
 		 }
-		 return (Object) head.data;
+		
     }
-	//getting the last node
+	//Hosea James Zacarias
 	public Object getLast() {
-		int ctr = 1;
 		if(isEmpty()) {
 			error_message("The list is empty");
 			return null;
@@ -191,7 +205,7 @@ public class LNode <Object>{
 		}
 	}
 	
-	//Adding a node in the middle
+	//Hosea James Zacarias
 	public void addInMiddle(Object value) {
 		if(isEmpty()) {
 			addAtFirst(value);
@@ -212,7 +226,7 @@ public class LNode <Object>{
 		}
 		
 	}
-	//deleting a node in the middle
+	//Hosea James Zacarias
 	public void deleteInMiddle() {
 		if(isEmpty()) { 
 			error_message("Deleting Not Allowed. Linked List is empty");
@@ -237,7 +251,7 @@ public class LNode <Object>{
 		}
 	}
 	
-	//deleting a value from the list that exist
+	//Hosea James Zacarias
 	public void deleteValue(Object value) {
 		 if(isEmpty()){ //if empty notify the user
 	            error_message("There is no List to delete a value");
@@ -268,7 +282,7 @@ public class LNode <Object>{
 	        }
 	    }
 	
-	//getting the position/index of a value
+	//Hosea James Zacarias
 	public int indexAt(Object value) {
 		int position = 0;
 		LNode current = head;
@@ -296,5 +310,20 @@ public class LNode <Object>{
 			current = current.next;
 		}
 		return (Object) current.data;
+	}
+	public Object getNode(int position) {
+		Object value = null;
+		if(isEmpty()) {
+			error_message("The list is empty try adding some values");
+		} else {
+			LNode<Object> pointer = head;
+			int ctr = 0;
+			while(ctr != position) {
+				pointer = pointer.next;
+				ctr++;
+			}//end of while
+			value =(Object)pointer.data;
+		}
+		return value;
 	}
 }
