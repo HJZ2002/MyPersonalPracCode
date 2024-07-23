@@ -19,31 +19,70 @@ public class Cipherv1 {
         }
         return result.toString();
     }
+    // Method to brute-force decrypt a message with all possible keys
+    public static void bruteForceDecrypt(String text) {
+        System.out.println("Trying all possible keys: ");
+        for (int key = 1; key < 26; key++) {
+            String decryptedText = cipher(text, -key);
+            System.out.println("Key " + key + ": " + decryptedText);
+        }
+    }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
-        // Input original message
-        System.out.print("Enter the message: ");
-        String text = scanner.nextLine();
-
-        // encryption key
         int key = 3;
+        boolean continueLoop = true;
 
-        // Encrypt the message
-        String cipheredText = cipher(text, key);
+        // Looping method so that it can be asked again
+        while (continueLoop) {
+            System.out.println("Choose an option:");
+            System.out.println("1. Encrypt a message");
+            System.out.println("2. Decrypt a message with known key");
+            System.out.println("3. Decrypt a message with unknown key");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
 
-     
-        // Display original, encrypted, and decrypted messages
-        System.out.println("Original message: " + text);
-        System.out.println("Encrypted message: " + cipheredText);
-        
-        System.out.println("Enter the message to decrypt: ");
-        
-        String encryptedTextToDecrypt = scanner.nextLine();
-        
-        String decryptedText = cipher(encryptedTextToDecrypt, -key);
-        
-        System.out.println("The message says: " + decryptedText);
+            switch (choice) {
+                case 1:
+                    // Input original message
+                    System.out.print("Enter the message to encrypt: ");
+                    String textToEncrypt = scanner.nextLine();
+                    // Encrypt the message
+                    String cipheredText = cipher(textToEncrypt, key);
+                    // Display original and encrypted messages
+                    System.out.println("Original message: " + textToEncrypt);
+                    System.out.println("Encrypted message: " + cipheredText);
+                    break;
+
+                case 2:
+                    // Decrypting the message with known key
+                    System.out.print("Enter the message to decrypt: ");
+                    String encryptedTextToDecrypt = scanner.nextLine();
+                    String decryptedText = cipher(encryptedTextToDecrypt, -key);
+                    System.out.println("Decrypted message: " + decryptedText);
+                    break;
+
+                case 3:
+                    // Decrypting the message with unknown key 
+                    System.out.print("Enter the encrypted message: ");
+                    String textToBruteForce = scanner.nextLine();
+                    bruteForceDecrypt(textToBruteForce);
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    continue;
+            }
+
+            System.out.print("Do you want to perform another operation? (y/n): ");
+            String response = scanner.nextLine().toLowerCase();
+            if (!response.equals("y")) {
+                continueLoop = false;
+            }
+        }
+
+        scanner.close();
+        System.out.println("Exiting");
     }
 }
