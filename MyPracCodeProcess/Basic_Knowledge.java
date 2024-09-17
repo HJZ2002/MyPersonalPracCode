@@ -3,43 +3,41 @@ import java.util.Scanner;
 public class Basic_Knowledge {
 	
 	public static void main(String[]args) {
-		//scanner
-		Scanner scan = new Scanner (System.in);
-		//putting the variables
-		System.out.println(" Enter Number 1 ");
-		int number = scan.nextInt();
-		System.out.println(" Enter Number 2 ");
-		int number2 = scan.nextInt();
+		Scanner scan = new Scanner(System.in);
+		System.out.println(" Enter Number 1");
+		int num1 = scan.nextInt();
+		System.out.println(" Enter Number 2");
+		int num2 = scan.nextInt();
 		
-		System.out.println(("Choose the operator + - / % * "));
-		String operator = scan.next();
-		
+		// setting operator
+		String operator = "";
 		int result = 0;
-		// switch method
-		switch(operator) {
-		case"+":
-			result = number + number2;
-			break;
-		case"-":
-			result = number - number2;
-			break;
-		case"%":
-			result = number % number2;
-			break;
-		case"*":
-			result = number * number2;
-			break;
-		case"/":
-		if (number2!=0) {
-			result = number/number2;
-		} else {
-			System.out.println(" Zero is not allowed");
-			return;
+		while(operator.isEmpty()) {
+			System.out.println(" Choose the Operator +-*%/");
+			operator = scan.next();
+			
+			switch(operator) {
+			case"+":
+				result = num1 + num2;
+				break;
+			case"-":
+				result = num1 - num2;
+				break;
+			case"*":
+				result = num1 * num2;
+				break;
+			case"%":
+				result = num1 % num2;
+				break;
+			case"/":
+				if(num2!=0) {
+					result = num1/num2;
+				} else {
+					System.out.println(" Zero is not a valid number ");
+				} default:
+					System.out.println(" Invalid operator");
+					break;
+			} System.out.println("" + result);
 		}
-		break;
-		default:
-			System.out.println(" Invalid operator");
 	}
-		System.out.println("Your answer is "+result);
-}
 }
