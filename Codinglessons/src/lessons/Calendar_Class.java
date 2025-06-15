@@ -16,18 +16,24 @@ public class Calendar_Class {
 		int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 		
 		// Print the day of the week
-		System.out.println("Day of the week for 1st JUNE 2025: " + dayOfWeek);
+		System.out.println("Day of the week for JUNE 2025: " + dayOfWeek);
 		
 		// Create a Timer to print the current time every second
 		Timer timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask() {
 			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss"); //setting up Hours minutes and seconds
 			SimpleDateFormat fulldayformat = new SimpleDateFormat("EEEE");
+			SimpleDateFormat monthformat = new SimpleDateFormat("MMMM");
+			SimpleDateFormat yearformat = new SimpleDateFormat("yyyy");
+			SimpleDateFormat dayformat = new SimpleDateFormat("dd");
 			public void run() {
 				Calendar now = Calendar.getInstance();
 				String currentTime = sdf.format(now.getTime());
 				String currentDay = fulldayformat.format(now.getTime());
-				System.out.println("Current time: " + currentTime + " on " + currentDay);
+				String currentMonth = monthformat.format(now.getTime());
+				String currentYear = yearformat.format(now.getTime());
+				String daynumber = dayformat.format(now.getTime());
+				System.out.println("Current Time: " + currentTime + " | Day: " + currentDay + " | Month: " + currentMonth + " | Year: " + currentYear + " | Day Number: " + daynumber);
 			}
 		}, 0, 1000);
 		
