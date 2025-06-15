@@ -22,23 +22,24 @@ public class Calendar_Class {
 		Timer timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask() {
 			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss"); //setting up Hours minutes and seconds
-			SimpleDateFormat fulldayformat = new SimpleDateFormat("EEEE");
-			SimpleDateFormat monthformat = new SimpleDateFormat("MMMM");
-			SimpleDateFormat yearformat = new SimpleDateFormat("yyyy");
-			SimpleDateFormat dayformat = new SimpleDateFormat("dd");
+			SimpleDateFormat fulldayformat = new SimpleDateFormat("EEEE");// setting up full day format example Monday
+			SimpleDateFormat monthformat = new SimpleDateFormat("MMMM"); // setting up the months
+			SimpleDateFormat yearformat = new SimpleDateFormat("yyyy"); //year
+			SimpleDateFormat dayformat = new SimpleDateFormat("dd"); //day number
+			
 			public void run() {
 				Calendar now = Calendar.getInstance();
-				String currentTime = sdf.format(now.getTime());
-				String currentDay = fulldayformat.format(now.getTime());
-				String currentMonth = monthformat.format(now.getTime());
-				String currentYear = yearformat.format(now.getTime());
-				String daynumber = dayformat.format(now.getTime());
+				String currentTime = sdf.format(now.getTime()); // getting the current time
+				String currentDay = fulldayformat.format(now.getTime()); // getting the full day name
+				String currentMonth = monthformat.format(now.getTime()); // getting the current month name
+				String currentYear = yearformat.format(now.getTime()); // getting the current year
+				String daynumber = dayformat.format(now.getTime()); // getting the current day number
 				System.out.println("Current Time: " + currentTime + " | Day: " + currentDay + " | Month: " + currentMonth + " | Year: " + currentYear + " | Day Number: " + daynumber);
 			}
 		}, 0, 1000);
 		
 		try {
-			Thread.sleep(5000); // Let it run for 5 seconds
+			Thread.sleep(5000); // Let it run for 5 seconds or you can change this to any duration you want
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
