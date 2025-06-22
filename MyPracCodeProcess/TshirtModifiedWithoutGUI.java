@@ -63,7 +63,7 @@ public class TshirtModifiedWithoutGUI {
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                     LocalDateTime now = LocalDateTime.now();
 
-                    try (FileWriter writer = new FileWriter("Receipt.txt", true)) { // append mode
+                    try (FileWriter writer = new FileWriter("Receipt.txt", true)) { 
                         writer.write("=== T-SHIRT RECEIPT ===\n");
                         writer.write("Date & Time: " + dtf.format(now) + "\n");
                         writer.write("Color      : " + color + "\n");
