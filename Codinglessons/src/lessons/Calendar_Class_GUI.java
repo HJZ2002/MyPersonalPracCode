@@ -36,9 +36,8 @@ public class Calendar_Class_GUI extends JFrame {
         add(yearLabel);
         add(daynumberLabel);
 
-        // Set the date to 1st June 2025 and get the day of the week
+       
         Calendar calendar = Calendar.getInstance();
-        calendar.set(2025, Calendar.JUNE, 1);
         SimpleDateFormat dayFormat = new SimpleDateFormat("E");
         String dayOfWeek = dayFormat.format(calendar.getTime());
        
