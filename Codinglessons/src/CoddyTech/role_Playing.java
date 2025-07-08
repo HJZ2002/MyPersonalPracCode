@@ -29,19 +29,20 @@ public class role_Playing {
 			break;
 			
 		case 4: //healer
-				ability = "Life Giver";
-				health = 40;
-				power = 7;
-				break;
+			ability = "Life Giver";
+			health = 40;
+			power = 7;
+			break;
 		case 5: //Knight class
-				ability = "Shield Bearer";
-				health = 90;
-				power = 8;
-				break;
-				default:
-					ability = "Unknown Class";
-					health = 0;
-					power = 0;
+			ability = "Shield Bearer";
+			health = 90;
+			power = 8;
+			break;
+				
+			default:
+			ability = "Unknown Class";
+			health = 0;
+			power = 0;
 		}
 		 	System.out.println("Character Creation:");
 	        System.out.println("-----------------");
