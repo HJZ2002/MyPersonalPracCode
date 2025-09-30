@@ -29,7 +29,7 @@ public class Grade_Method {
 				}
 				// Exit the loop after processing a valid grade
 			}
-		    // Option to exit if they are sure of there grade
+		    // exit if they are sure of there grade
             System.out.print("Do you want to enter another grade? (yes/no): ");
             String choice = sc.next();
             if (choice.equalsIgnoreCase("no")) {
@@ -39,4 +39,5 @@ public class Grade_Method {
         }
 
     }
+
 }
