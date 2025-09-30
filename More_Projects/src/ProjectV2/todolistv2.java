@@ -104,7 +104,7 @@ public class todolistv2 {
         }
         Task t = new Task(title);
 
-        // Optional quick set for due date & priority
+        // quick set for due date & priority
         System.out.print("Set due date? (yyyy-MM-dd or leave blank): ");
         String due = readLine(sc).trim();
         if (!due.isEmpty()) {
@@ -337,6 +337,7 @@ public class todolistv2 {
         return a.compareTo(b);
     }
 }
+
 
 
 
