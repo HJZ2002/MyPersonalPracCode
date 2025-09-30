@@ -7,18 +7,24 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
-
+/**
+ * Upgraded Console To-Do List
+ * - Add, view, edit, delete, mark done/undone
+ * - Search & filter
+ * - Due date (optional) & priority
+ * - Auto load/save to tasks.csv (in working directory)
+ */
 public class todolistv2 {
 
     // ====== Config ======
-    private static final String SAVE_FILE = "tasks.csv";
+    private static final String SAVE_FILE = "tasks.txt";
     private static final DateTimeFormatter DATE_FMT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     // ====== Data Model ======
     static class Task {
         String title;
         boolean done;
-        Integer priority;      
+        Integer priority;      // 1 (high) .. 5 (low). Null if not set.
         LocalDate dueDate;     // Null if not set.
 
         Task(String title) { this.title = title; }
@@ -59,21 +65,21 @@ public class todolistv2 {
         Scanner sc = new Scanner(System.in);
         List<Task> tasks = new ArrayList<>();
 
-        // Load saved tasks
+        // Load saved tasks 
         loadTasks(tasks);
 
         while (true) {
             System.out.println("\n-- TASK TO-DO LIST --");
-            System.out.println("1. Add Task");
-            System.out.println("2. View Tasks");
-            System.out.println("3. Edit Task Title");
-            System.out.println("4. Mark Done / Undone");
-            System.out.println("5. Delete Task");
-            System.out.println("6. Search Tasks");
-            System.out.println("7. Filter (All / Pending / Done)");
-            System.out.println("8. Set Due Date / Priority");
-            System.out.println("9. Save Now");
-            System.out.println("0. Exit");
+            System.out.println("1. Add Task");// adds the task
+            System.out.println("2. View Tasks");// views the task
+            System.out.println("3. Edit Task Title");// edits the title of the task
+            System.out.println("4. Mark Done / Undone");// set the task done which leads to no update
+            System.out.println("5. Delete Task");// deletes the task
+            System.out.println("6. Search Tasks");// searches the task by keyword
+            System.out.println("7. Filter (All / Pending / Done)");// filters the task by pending or done or all
+            System.out.println("8. Set Due Date / Priority");// sets the due date and priority
+            System.out.println("9. Save Now");// saves the task
+            System.out.println("0. Exit");// exits the program
             System.out.print("Choose an option: ");
 
             int choice = readInt(sc, -1);
@@ -104,7 +110,7 @@ public class todolistv2 {
         }
         Task t = new Task(title);
 
-        // quick set for due date & priority
+        // Optional quick set for due date & priority
         System.out.print("Set due date? (yyyy-MM-dd or leave blank): ");
         String due = readLine(sc).trim();
         if (!due.isEmpty()) {
@@ -120,12 +126,12 @@ public class todolistv2 {
             if (p == null || p < 1 || p > 5) System.out.println("Invalid priority. Skipped.");
             else t.priority = p;
         }
-
+        // adds the task and saved task afterwards
         tasks.add(t);
         saveTasks(tasks);
         System.out.println("Task added.");
     }
-
+    // views the task if there is any things have been adeed
     private static void viewTasks(List<Task> tasks) {
         if (tasks.isEmpty()) {
             System.out.println("-- No tasks yet --");
@@ -133,7 +139,7 @@ public class todolistv2 {
         }
         printTasks(tasks);
     }
-
+    // edits the title of the task if u wanna edit something
     private static void editTaskTitle(Scanner sc, List<Task> tasks) {
         if (tasks.isEmpty()) { System.out.println("No tasks to edit."); return; }
         printTasks(tasks);
@@ -148,7 +154,7 @@ public class todolistv2 {
         saveTasks(tasks);
         System.out.println("Updated.");
     }
-
+    // set the task done which leads to no update
     private static void toggleDone(Scanner sc, List<Task> tasks) {
         if (tasks.isEmpty()) { System.out.println("No tasks to update."); return; }
         printTasks(tasks);
@@ -161,7 +167,7 @@ public class todolistv2 {
         saveTasks(tasks);
         System.out.println("Now marked as " + (t.done ? "DONE." : "PENDING."));
     }
-
+    // deletes the task if u wanna delete something
     private static void deleteTask(Scanner sc, List<Task> tasks) {
         if (tasks.isEmpty()) { System.out.println("No tasks to delete."); return; }
         printTasks(tasks);
@@ -173,7 +179,7 @@ public class todolistv2 {
         saveTasks(tasks);
         System.out.println("Deleted: " + removed.title);
     }
-
+    // searches the task if u wanna search something by keyword
     private static void searchTasks(Scanner sc, List<Task> tasks) {
         System.out.print("Enter keyword to search: ");
         String q = readLine(sc).toLowerCase(Locale.ROOT).trim();
@@ -186,7 +192,7 @@ public class todolistv2 {
         if (hits.isEmpty()) System.out.println("No matches.");
         else printTasks(hits);
     }
-
+    // filters the task if u wanna filter something by pending or done or all
     private static void filterTasks(Scanner sc, List<Task> tasks) {
         if (tasks.isEmpty()) { System.out.println("No tasks yet."); return; }
         System.out.println("Filter: 1) All  2) Pending  3) Done");
@@ -201,7 +207,7 @@ public class todolistv2 {
         }
         printTasks(out);
     }
-
+    // sets the due date and priority depends on your time and importance
     private static void setDueAndPriority(Scanner sc, List<Task> tasks) {
         if (tasks.isEmpty()) { System.out.println("No tasks to update."); return; }
         printTasks(tasks);
@@ -211,13 +217,13 @@ public class todolistv2 {
 
         Task t = tasks.get(idx);
 
-        System.out.print("New due date (yyyy-MM-dd or blank to clear/skip): ");
+        System.out.print("New due date (yyyy-MM-dd or blank to clear/skip): ");// new due date
         String due = readLine(sc).trim();
         if (due.isEmpty()) {
             t.dueDate = null;
         } else {
             LocalDate d = parseDateSafe(due, null);
-            if (d == null) System.out.println("Invalid date. (kept old)");
+            if (d == null) System.out.println("Invalid date. (kept old)");// invalid date
             else t.dueDate = d;
         }
 
@@ -236,7 +242,8 @@ public class todolistv2 {
     }
 
     // ====== Persistence ======
-
+    
+    // loads the task if there is any saved task in the directory
     private static void loadTasks(List<Task> tasks) {
         Path p = Paths.get(SAVE_FILE);
         if (!Files.exists(p)) return;
@@ -251,7 +258,7 @@ public class todolistv2 {
             System.out.println("Failed to load tasks: " + e.getMessage());
         }
     }
-
+    // saves the task in the directory as tasks.csv
     private static void saveTasks(List<Task> tasks) {
         try (BufferedWriter bw = Files.newBufferedWriter(Paths.get(SAVE_FILE))) {
             for (Task t : tasks) {
@@ -264,7 +271,7 @@ public class todolistv2 {
     }
 
     // ====== Helpers ======
-
+    // prints the task in a formatted way and clean as possible
     private static void printTasks(List<Task> tasks) {
         if (tasks.isEmpty()) {
             System.out.println("-- No tasks to show --");
@@ -337,7 +344,3 @@ public class todolistv2 {
         return a.compareTo(b);
     }
 }
-
-
-
-
