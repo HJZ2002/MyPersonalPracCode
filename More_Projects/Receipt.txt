@@ -1,0 +1,54 @@
+T-Shirt Transaction Receipt
+Color: Blue
+Size: Small
+Price: 500.0
+Amount Paid: 600.0
+Change: 100.0
+------------------------------------------------------------
+T-Shirt Transaction Receipt
+Color: Blue
+Size: Small
+Price: 500.0
+Amount Paid: 500.0
+Change: 0.0
+------------------------------------------------------------
+Receipt:
+Color: Blue
+Size: Small
+Price: $100.0
+Amount Paid: $200.0
+Change: $100.0
+Date and Time: 2025/06/22 21:31:35
+-----------------------------
+=== T-SHIRT RECEIPT ===
+Date & Time: 2025-06-22 21:34:12
+Color      : Blue
+Size       : Medium
+Price      : 20.0
+Amount Paid: 30.0
+Change     : 10.0
+-------------------------------
+=== T-SHIRT RECEIPT ===
+Date & Time: 2025-06-22 21:38:29
+Color      : Blue
+Size       : Small
+Price      : 100.0
+Amount Paid: 200.0
+Change     : 100.0
+-------------------------------
+=== T-SHIRT RECEIPT ===
+Date & Time: 2025-06-22 21:43:10
+Color      : Yellow
+Size       : Large
+Price      : 1000.0
+Amount Paid: 1000.0
+Change     : 0.0
+-------------------------------
+=== T-SHIRT RECEIPT ===
+Date & Time: 2025-06-22 21:43:25
+Color      : YellowGreen
+Size       : Large
+Price      : 1500.0
+Amount Paid: 2000.0
+Change     : 500.0
+-------------------------------
