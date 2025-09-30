@@ -18,7 +18,7 @@ public class todolistv2 {
     static class Task {
         String title;
         boolean done;
-        Integer priority;      
+        Integer priority;      // 1 (high) .. 5 (low). Null if not set.
         LocalDate dueDate;     // Null if not set.
 
         Task(String title) { this.title = title; }
@@ -29,8 +29,8 @@ public class todolistv2 {
 
         String prettyPriority() { return priority == null ? "-" : String.valueOf(priority); }
 
-        // CSV (very simple; commas in text are replaced)
-        String toCsv() {
+        // to a txt file since its more clear
+        String totxt() {
             return escape(title) + "," + (done ? "1" : "0") + ","
                     + (priority == null ? "" : priority) + ","
                     + (dueDate == null ? "" : DATE_FMT.format(dueDate));
@@ -256,7 +256,7 @@ public class todolistv2 {
     private static void saveTasks(List<Task> tasks) {
         try (BufferedWriter bw = Files.newBufferedWriter(Paths.get(SAVE_FILE))) {
             for (Task t : tasks) {
-                bw.write(t.toCsv());
+                bw.write(t.totxt());
                 bw.newLine();
             }
         } catch (IOException e) {
@@ -338,4 +338,3 @@ public class todolistv2 {
         return a.compareTo(b);
     }
 }
-
