@@ -7,13 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
-/**
- * Upgraded Console To-Do List
- * - Add, view, edit, delete, mark done/undone
- * - Search & filter
- * - Due date (optional) & priority
- * - Auto load/save to tasks.csv (in working directory)
- */
+
 public class todolistv2 {
 
     // ====== Config ======
