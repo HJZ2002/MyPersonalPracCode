@@ -59,7 +59,7 @@ public class todolistv2 {
         Scanner sc = new Scanner(System.in);
         List<Task> tasks = new ArrayList<>();
 
-        // Load saved tasks (if any)
+        // Load saved tasks
         loadTasks(tasks);
 
         while (true) {
@@ -337,5 +337,6 @@ public class todolistv2 {
         return a.compareTo(b);
     }
 }
+
 
 
