@@ -18,7 +18,7 @@ public class todolistv2 {
     static class Task {
         String title;
         boolean done;
-        Integer priority;      // 1 (high) .. 5 (low). Null if not set.
+        Integer priority;      
         LocalDate dueDate;     // Null if not set.
 
         Task(String title) { this.title = title; }
@@ -29,7 +29,7 @@ public class todolistv2 {
 
         String prettyPriority() { return priority == null ? "-" : String.valueOf(priority); }
 
-        // to a txt file since its more clear
+        // to a txt file convertion
         String totxt() {
             return escape(title) + "," + (done ? "1" : "0") + ","
                     + (priority == null ? "" : priority) + ","
